@@ -1,17 +1,24 @@
 {
   "name": "storager-client-proto",
-  "version": "1.0.0",
-  "description": "",
+  "description": "Storager web client prototype application",
+  "version": "1.0.0-SNAPSHOT",
+
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "Alex Chunin, Ilia Gubarev",
+
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp backend-mock-deploy"
   },
-  "author": "",
-  "license": "ISC",
+
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  },
+
   "devDependencies": {
-    "express": "^4.14.0",
     "gulp": "^3.9.1",
-    "gulp-connect": "^5.0.0",
     "gulp-nodemon": "^2.1.0"
   }
 }

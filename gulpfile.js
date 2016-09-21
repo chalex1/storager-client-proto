@@ -1,31 +1,35 @@
-var gulp = require ('gulp');
+(function () {
 
-var nodemon = require('gulp-nodemon');
+  'use strict';
 
-gulp.task ('deploy-express', function (cb) {
-	
-	var started = false;
-	
-	return nodemon ({
+  // NOTE: require external dependencies
+  var gulp = require('gulp');
+  var nodemon = require('gulp-nodemon');
 
-		script: 'backend.dev/server.js'
-	}).on ('start', function () {
+  // NOTE: build configuration
+  var configuration = {
 
-		if (!started) {
-			cb ();
-			started = true; 
-		} 
-	});
-});
+    paths: {
 
-/*
-var connect = require ('gulp-connect');
+      backendMock: './backend-mock/server.js',
 
-gulp.task ('deploy', function () {
+      staticAssets: './src/'
+    }
+  };
 
-  connect.server({
-    root: 'src',
-    port: 8080
-  });
-});
-*/
+  // NOTE: backend mock startup task
+  gulp.task('backend-mock-deploy', function (callback) {
+
+    var started = false;
+
+    return nodemon({
+             script: configuration.paths.backendMock
+           })
+           .on('start', function () {
+             if (!started) {
+               callback();
+               started = true; 
+             } 
+           });
+   });
+})();
