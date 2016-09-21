@@ -1,208 +1,181 @@
-'use strict';
+(function () {
 
-var express = require ('express');
-var bodyParser = require('body-parser');
+  'use strict';
 
-var server = express ();
+  // NOTE: require external dependencies
+  var bodyParser = require('body-parser');
+  var express = require ('express');
 
-server.use (express.static ('src'));
-server.use (bodyParser.json ());
+  // NOTE: require internal dependencies
+  var notRemoved = require('./utils/not-removed');
+  var nullOrUndefined = require('./utils/null-or-undefined');
+  var processSubtree = require('./utils/process-subtree');
 
-var nullOrUndefined = function (object) {
-	return object === null || object === undefined;
-};
+  var server = express ();
 
-var notRemoved = function (object) {
-	return !object.removed;
-};
+  server.use (express.static ('src'));
+  server.use (bodyParser.json ());
 
-// --- PERIODS
+  // --- PERIODS
 
-var mockPeriods = [
+  var mockPeriods = [
 
-	{
-		code: "DAY",
-		title: "День"
-	},
+    {
+      code: "DAY",
+      title: "День"
+    },
 
-	{
-		code: "WEEK",
-		title: "Неделя"
-	},
+    {
+      code: "WEEK",
+      title: "Неделя"
+    },
 
-	{
-		code: "MONTH",
-		title: "Месяц"
-	},
+    {
+      code: "MONTH",
+      title: "Месяц"
+    },
 
-	{
-		code: "QUARTER",
-		title: "Квартал"
-	},
+    {
+      code: "QUARTER",
+      title: "Квартал"
+    },
 
-	{
-		code: "HALF_YEAR",
-		title: "Полугодие"
-	},
+    {
+      code: "HALF_YEAR",
+      title: "Полугодие"
+    },
 
-	{
-		code: "YEAR",
-		title: "Год"
-	}
-]
+    {
+      code: "YEAR",
+      title: "Год"
+    }
+  ]
 
-server.get ('/data/periods', function (req, res) {
+  server.get ('/data/periods', function (req, res) {
 
-    res.json (mockPeriods);
-});
-
-
-// --- TERRITORIES
-
-var mockTerritories = [
-
-	{
-		code: "1001",
-		title: "Территория 1001",
-		terminal: false,
-		parentCode: null
-	},
-
-	{
-		code: "1001.1",
-		title: "Территория 1001.1",
-		terminal: true,
-		parentCode: "1001"
-	},
-
-	{
-		code: "1001.2",
-		title: "Территория 1001.2",
-		terminal: true,
-		parentCode: "1001"
-	},
-
-	{
-		code: "1002",
-		title: "Территория 1002",
-		terminal: true,
-		parentCode: null
-	}
-];
+      res.json (mockPeriods);
+  });
 
 
-server.get ('/data/territories/:code', function (req, res) {
+  // --- TERRITORIES
 
-	var code = req.params.code;
-	var filtered = mockTerritories.filter (function (territory) {
-		return territory.code === code && notRemoved (territory);
-	});
-	if (filtered.length === 0) {
-		res.status (404).send ("no such territoty");
-	} else {
-		res.json (filtered[0]);
-	}
-});
+  var mockTerritories = [
 
-server.get ('/data/territories/:code/descendants', function (req, res) {
+    {
+      code: "1001",
+      title: "Территория 1001",
+      terminal: false,
+      parentCode: null
+    },
 
-	var code = req.params.code;
-	res.json (mockTerritories.filter (function (territory) {
-		return territory.parentCode === code && notRemoved (territory);
-	}));
-});
+    {
+      code: "1001.1",
+      title: "Территория 1001.1",
+      terminal: true,
+      parentCode: "1001"
+    },
 
-server.get ('/data/territories', function (req, res) {
+    {
+      code: "1001.2",
+      title: "Территория 1001.2",
+      terminal: true,
+      parentCode: "1001"
+    },
 
-	res.json (mockTerritories
-					.filter (function (territory) {
-						return notRemoved (territory);
-					})
-					.filter (function (territory) {
-						return territory.parentCode === null;
-					})
-		     );
-});
+    {
+      code: "1002",
+      title: "Территория 1002",
+      terminal: true,
+      parentCode: null
+    }
+  ];
 
-server.post ('/data/territories', function (req, res) {
 
-	var newTerritory = req.body;
+  server.get ('/data/territories/:code', function (req, res) {
 
-	var territoryExists;
-	var parentFound;
+    var code = req.params.code;
+    var filtered = mockTerritories.filter (function (territory) {
+      return territory.code === code && notRemoved (territory);
+    });
+    if (filtered.length === 0) {
+      res.status (404).send ("no such territoty");
+    } else {
+      res.json (filtered[0]);
+    }
+  });
 
-	mockTerritories.forEach (function (territory) {
-		if (territory.code === newTerritory.code && notRemoved (territory)) {
-			territoryExists = true;
-		}
-		if (territory.code === newTerritory.parentCode && notRemoved (territory)) {
-			parentFound = territory.code;
-		}
-	});
-	
-	if (territoryExists) {
-		res.status (404).send ("territory code already exists");
-		return;
-	}
+  server.get ('/data/territories/:code/descendants', function (req, res) {
 
-	if (!parentFound && !nullOrUndefined(newTerritory.parentCode)) {
-		res.status (404).send ("parent territory not found");
-		return;
-	}
+    var code = req.params.code;
+    res.json (mockTerritories.filter (function (territory) {
+      return territory.parentCode === code && notRemoved (territory);
+    }));
+  });
 
-	newTerritory.terminal = true;
-	mockTerritories.push (newTerritory);
-	
-	res.json (newTerritory);
-});
+  server.get ('/data/territories', function (req, res) {
 
-var processSubtree = function (items, code, processor) {
+    res.json (mockTerritories
+            .filter (function (territory) {
+              return notRemoved (territory);
+            })
+            .filter (function (territory) {
+              return territory.parentCode === null;
+            })
+           );
+  });
 
-	items
-		.filter (function (item) {
-			return item.code === code && notRemoved (item);
-		})
-		.forEach (function (item) {
-			processor (item);
-			items.forEach (function (child) {
-				if (child.parentCode === code) {
-					processSubtree (items, child.code, processor);
-				}
-			});
-		})
-};
+  server.post ('/data/territories', function (req, res) {
 
-var collectSubtree = function (items, code, result) {
+    var newTerritory = req.body;
 
-	items.forEach (function (item) {
-		if (item.parentCode === code) {
-			result.push (item);
-			collectSubtree (items, item.code, result);
-		}
-	});
-	
-	return result;
-};
+    var territoryExists;
+    var parentFound;
 
-server.delete ('/data/territories/:code', function (req, res) {
+    mockTerritories.forEach (function (territory) {
+      if (territory.code === newTerritory.code && notRemoved (territory)) {
+        territoryExists = true;
+      }
+      if (territory.code === newTerritory.parentCode && notRemoved (territory)) {
+        parentFound = territory.code;
+      }
+    });
+    
+    if (territoryExists) {
+      res.status (404).send ("territory code already exists");
+      return;
+    }
 
-	processSubtree (mockTerritories, req.params.code, function (territory) {
-		territory.removed = true;
-	});
+    if (!parentFound && !nullOrUndefined(newTerritory.parentCode)) {
+      res.status (404).send ("parent territory not found");
+      return;
+    }
 
-	res.status (204).json ({});
-});
+    newTerritory.terminal = true;
+    mockTerritories.push (newTerritory);
+    
+    res.json (newTerritory);
+  });
 
-/*
-GET /territories/tops // <- get top-level territories
-GET /territories/{code} // <- get speocific territory by code
-GET /territories/{code}/descendants // <- get descendants of code specific territory
+  server.delete ('/data/territories/:code', function (req, res) {
 
-POST /territories // <- add new territory
-PUT /territories/{code} // <- update territory
-DELETE /territories/{code} // <- delete territory (soft)
-*/
+    processSubtree (mockTerritories, req.params.code, function (territory) {
+      territory.removed = true;
+    });
+
+    res.status (204).json ({});
+  });
+
+  /*
+  GET /territories/tops // <- get top-level territories
+  GET /territories/{code} // <- get speocific territory by code
+  GET /territories/{code}/descendants // <- get descendants of code specific territory
+
+  POST /territories // <- add new territory
+  PUT /territories/{code} // <- update territory
+  DELETE /territories/{code} // <- delete territory (soft)
+  */
 
 
 
-server.listen (8090);
+  server.listen (8090);
+})();
