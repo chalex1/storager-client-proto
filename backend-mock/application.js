@@ -5,8 +5,6 @@
   // NOTE: application module
   module.exports = {
 
-    addRouter: addRouter,
-
     start: start
   };
 
@@ -15,18 +13,16 @@
 
     routes: {
 
-      data: '/data/'
+      data: '/data'
     }
   };
 
-  function addRouter(router, prefix) {
-    router.apply(server, prefix);
-    return server;
-  }
-
+  // NOTE: application startup
   function start(configuration) {
 
     var server = imports.express();
+
+    imports.periodRouter.apply(server, defaults.routes.data);
 
     server
         .use(imports.bodyParser.json())
@@ -37,6 +33,8 @@
 
   bodyParser: require('body-parser'),
   express: require('express'),
+
+  periodRouter: require('./periods/router'),
 
   notRemoved: require('./utils/not-removed'),
   nullOrUndefined: require('./utils/null-or-undefined'),

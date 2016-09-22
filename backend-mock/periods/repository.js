@@ -1,4 +1,4 @@
-(function () {
+(function (imports) {
 
   'use strict';
 
@@ -8,15 +8,15 @@
     getAll: getAll
   };
 
-  var _mockPeriods;
+  var mockPeriods;
 
   // NOTE: gets all available time periods
   function getAll() {
-    return _mockPeriods;
+    return mockPeriods;
   }
 
   // NOTE: available time period mocks
-  _mockPeriods = [
+  mockPeriods = [
     {
       code: "DAY",
       title: "День"
@@ -42,4 +42,4 @@
       title: "Год"
     }
   ];
-})();
+})({});

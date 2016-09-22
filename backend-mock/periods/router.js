@@ -1,48 +1,29 @@
-(function () {
+(function (imports) {
 
   'use strict';
 
-  // NOTE: require external dependencies
-  var express = require('express');
-
-  // NOTE: time period repository
+  // NOTE: time period router
   module.exports = {
 
-    getAll: getAll
+    apply: apply
   };
 
-  var _mockPeriods;
+  var router;
 
-  // NOTE: gets all available time periods
-  function getAll() {
-    return _mockPeriods;
+  // NOTE: applies the router to specified server
+  function apply(server, routePrefix) {
+    server.use(routePrefix + '/periods', router);
   }
 
-  // NOTE: available time periods
-  _mockPeriods = [
-    {
-      code: "DAY",
-      title: "День"
-    },
-    {
-      code: "WEEK",
-      title: "Неделя"
-    },
-    {
-      code: "MONTH",
-      title: "Месяц"
-    },
-    {
-      code: "QUARTER",
-      title: "Квартал"
-    },
-    {
-      code: "HALF_YEAR",
-      title: "Полугодие"
-    },
-    {
-      code: "YEAR",
-      title: "Год"
-    }
-  ];
-})();
+  router = imports.express.Router()
+
+      // NOTE: returns all available periods
+      .get('/', function (request, response) {
+        response.json(imports.repository.getAll());
+      });
+})({
+
+  express: require('express'),
+
+  repository: require('./repository')
+});
