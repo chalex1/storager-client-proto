@@ -22,6 +22,7 @@
 
     var server = imports.express();
 
+    imports.indicatorRouter.apply(server, defaults.routes.data);
     imports.periodRouter.apply(server, defaults.routes.data);
     imports.territoryRouter.apply(server, defaults.routes.data);
 
@@ -35,6 +36,7 @@
   bodyParser: require('body-parser'),
   express: require('express'),
 
+  indicatorRouter: require ('./indicators/router'),
   periodRouter: require('./periods/router'),
   territoryRouter: require('./territories/router')
 });
