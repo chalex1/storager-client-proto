@@ -23,6 +23,7 @@
     var server = imports.express();
 
     imports.periodRouter.apply(server, defaults.routes.data);
+    imports.territoryRouter.apply(server, defaults.routes.data);
 
     server
         .use(imports.bodyParser.json())
@@ -35,8 +36,5 @@
   express: require('express'),
 
   periodRouter: require('./periods/router'),
-
-  notRemoved: require('./utils/not-removed'),
-  nullOrUndefined: require('./utils/null-or-undefined'),
-  processSubtree: require('./utils/process-subtree')
+  territoryRouter: require('./territories/router')
 });
