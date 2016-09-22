@@ -9,6 +9,11 @@ $ npm install
 ```
 
 ## Deployment
+To start the application at the default (8080) port:
 ```
 $ npm start
+```
+You can also specify a custom port, for example:
+```
+$ npm start -- --port=5000
 ```
