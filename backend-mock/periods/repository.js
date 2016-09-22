@@ -15,7 +15,7 @@
     return _mockPeriods;
   }
 
-  // NOTE: available time periods
+  // NOTE: available time period mocks
   _mockPeriods = [
     {
       code: "DAY",
