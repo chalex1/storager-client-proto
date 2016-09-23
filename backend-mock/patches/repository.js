@@ -17,9 +17,9 @@
                             return (
                               (!filtering.status || filtering.status === patch.status)
                               &&
-                              (!filtering.since || filtering.since <= patch.since)
+                              (!filtering.since || unixTime(filtering.since) <= unixTime(patch.since))
                               &&
-                              (!filtering.until || filtering.until >= patch.until)
+                              (!filtering.until || unixTime(filtering.until) >= unixTime(patch.until))
                               &&
                               (!filtering.providerTitle || filtering.providerTitle === imports.providerRepository.findById(patch.providerId).title)
                             );
@@ -37,11 +37,15 @@
                 });
   }
 
+  function unixTime(iso) {
+    return Date.parse(iso).getTime();
+  }
+
   patches = [
     {
       id: imports.uuid.v4(),
       comment: "Загрузка значений A",
-      createdAt: Date.now(),
+      createdAt: imports.timestamp(),
       providerId: "1",
       status: "SUCCESS",
       indicatorInfos: [
@@ -60,5 +64,6 @@
 
   uuid: require('uuid'),
 
-  providerRepository: require('../providers/repository')
+  providerRepository: require('../providers/repository'),
+  timestamp: require('../utils/timestamp')
 });

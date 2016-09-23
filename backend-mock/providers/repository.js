@@ -23,7 +23,7 @@
 
   function create(provider) {
     provider.id = id();
-    provider.registeredAt = Date.now();
+    provider.registeredAt = imports.timestamp();
     provider.token = imports.uuid.v4();
     provider.push(provider);
     return provider;
@@ -76,14 +76,14 @@
     {
       id: id(),
       title: "Provider A",
-      registeredAt: Date.now(),
+      registeredAt: imports.timestamp(),
       token: imports.uuid.v4(),
       grants: ["1001", "1002"]
     },
     {
       id: id(),
       title: "Provider B",
-      registeredAt: Date.now(),
+      registeredAt: imports.timestamp(),
       token: imports.uuid.v4(),
       grants: ["1001.1"]
     }
@@ -92,5 +92,6 @@
 
   uuid: require('uuid'),
 
-  notRemoved: require('../utils/not-removed')
+  notRemoved: require('../utils/not-removed'),
+  timestamp: require('../utils/timestamp')
 });

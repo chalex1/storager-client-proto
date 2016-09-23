@@ -27,7 +27,7 @@
       login: "guest",
       email: "guest@sample.email.com",
       fullname: "Гостевой доступ",
-      registeredAt: Date.now(),
+      registeredAt: imports.timestamp(),
       enabled: true,
       special: true,
       guest: true,
@@ -37,7 +37,7 @@
       login: "user",
       email: "user@sample.email.com",
       fullname: "Юзеров Ю. Ю.",
-      registeredAt: Date.now(),
+      registeredAt: imports.timestamp(),
       enabled: true,
       roles: ["USER"]
     },
@@ -45,7 +45,7 @@
       login: "admin",
       email: "admin@sample.email.com",
       fullname: "Админов А. А.",
-      registeredAt: Date.now(),
+      registeredAt: imports.timestamp(),
       enabled: true,
       roles: ["ADMIN", "USER"]
     },
@@ -53,11 +53,14 @@
       login: "root",
       email: "root@sample.email.com",
       fullname: "Доступ корневого уровня",
-      registeredAt: Date.now(),
+      registeredAt: imports.timestamp(),
       enabled: true,
       special: true,
       root: true,
       roles: ["ROOT", "ADMIN", "USER"]
     }
   ];
-})({});
+})({
+
+  timestamp: require('../../utils/timestamp')
+});

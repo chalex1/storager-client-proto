@@ -24,7 +24,7 @@
   function create(userLogin) {
     const token = {
       id: imports.uuid.v4(),
-      createdAt: Date.now(),
+      createdAt: imports.timestamp(),
       userLogin: userLogin
     };
     tokens.push(token);
@@ -74,5 +74,7 @@
   reset();
 })({
 
-  uuid: require('uuid')
+  uuid: require('uuid'),
+
+  timestamp: require('../../utils/timestamp')
 });
