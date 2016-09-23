@@ -24,6 +24,7 @@
 
     imports.indicatorRouter.apply(server, defaults.routes.data);
     imports.periodRouter.apply(server, defaults.routes.data);
+    imports.providerRouter.apply(server, defaults.routes.data);
     imports.territoryRouter.apply(server, defaults.routes.data);
 
     imports.credentialRouter.apply(server, defaults.routes.data);
@@ -42,6 +43,7 @@
 
   indicatorRouter: require ('./indicators/router'),
   periodRouter: require('./periods/router'),
+  providerRouter: require('./providers/router'),
   territoryRouter: require('./territories/router'),
 
   credentialRouter: require('./security/credentials/router'),
