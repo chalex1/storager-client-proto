@@ -294,4 +294,3 @@ Returns a list of users.
 ## Special Notes
 * User management is not designed (and is not planned).
 * Codes of hierarchic items (like indicators or territories) can't be updated now.
-* Timestamps are stored and passed as numbers (UNIX-time) now.
