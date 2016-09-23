@@ -2,13 +2,13 @@
 
 ## Routes
 
-#### Index Page
+### Index Page
 All the requests which start neither with `/data/` nor with `/static/` return the index HTML page as response.
 
-#### Data 
+### Data 
 Requests starting with `/data/` are designed to return data in JSON format.
 
-#### Static Assets
+### Static Assets
 Requests starting with `/static/` are designed to return static assets, f.e:
 * JavaScript code
 * HTML templates
@@ -33,34 +33,36 @@ When not containg any valid security token, requests are treated as unauthorized
 
 ## Business Features
 
-#### Periods
+### Periods
+
+#### Retrieve all existing time periods:
+```
+GET /data/periods
+```
+Returns a list of periods. Required roles: **USER** or **ADMIN**
+
+### Territories
 *TODO: add this section*
 
-#### Territories
+### Indicators
 *TODO: add this section*
 
-#### Indicators
+### Providers
 *TODO: add this section*
 
-#### Providers
-*TODO: add this section*
-
-#### Patches
+### Patches
 *TODO: add this section*
 
 ## Security Features
 
-#### Logon
+### Logon
 *TODO: add this section*
 
-#### Logout
+### Logout
 *TODO: add this section*
 
-#### Users
+### Users
 *TODO: add this section*
 
 ## Root Access
-*TODO: add this section*
-
-## Special Notes
 *TODO: add this section*
