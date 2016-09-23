@@ -25,6 +25,11 @@
     imports.indicatorRouter.apply(server, defaults.routes.data);
     imports.periodRouter.apply(server, defaults.routes.data);
     imports.territoryRouter.apply(server, defaults.routes.data);
+
+    imports.credentialRouter.apply(server, defaults.routes.data);
+    imports.logonRouter.apply(server, defaults.routes.data);
+    imports.logoutRouter.apply(server, defaults.routes.data);
+    imports.tokenRouter.apply(server, defaults.routes.data);
     imports.userRouter.apply(server, defaults.routes.data);
 
     server
@@ -38,5 +43,10 @@
   indicatorRouter: require ('./indicators/router'),
   periodRouter: require('./periods/router'),
   territoryRouter: require('./territories/router'),
+
+  credentialRouter: require('./security/credentials/router'),
+  logonRouter: require('./security/logon/router'),
+  logoutRouter: require('./security/logout/router'),
+  tokenRouter: require('./security/tokens/router'),
   userRouter: require('./security/users/router')
 });
