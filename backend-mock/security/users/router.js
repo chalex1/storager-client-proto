@@ -15,9 +15,13 @@
 
   router = imports.express.Router()
 
-      // NOTE: returns all available periods
+      .get('/', function (request, response) {
+        response.json(imports.repository.findAll());
+      })
+
       .get('/current', function (request, response) {
-        response.json(imports.repository.getAll());
+        var login = "root"; // TODO: 
+        response.json(imports.repository.findByLogin(login));
       });
 })({
 

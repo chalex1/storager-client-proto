@@ -17,8 +17,8 @@
 
   function findByLogin(login) {
     return users
-                .find(function (login) {
-                  return token.login === login;
+                .find(function (user) {
+                  return user.login === login;
                 });
   }
 
