@@ -3,21 +3,20 @@
 ## Routes
 
 ### Index Page
-All the requests which start neither with `/data/` nor with `/static/` return the index HTML page as response.
+All the requests which start neither with `/data/` nor with `/static/` return the index HTML page as response. These requests are allowed to be unauthenticated.
 
 ### Data 
-Requests starting with `/data/` are designed to return data in JSON format.
+Requests starting with `/data/` are designed to return data in JSON format. These requests are **not** allowed to be unauthenticated (except of those for *logon* feature).
 
 ### Static Assets
 Requests starting with `/static/` are designed to return static assets, f.e:
 * JavaScript code
 * HTML templates
 * CSS resources
+These requests are allowed to be unauthenticated.
 
 ## Authentication & Authorization
-**Current status:** authentication and authorization are not applied at the moment.
-
-Before being performed, client requests are validated against existing roles to have sufficient authorization.
+Before being performed, client requests on data routes are validated against existing roles to have sufficient authorization.
 
 There are 2 normal roles:
 * USER (authorized to access application in read-only mode)
@@ -44,7 +43,7 @@ When not containg any valid security token, requests are treated as unauthorized
 ```
 GET /data/periods
 ```
-Returns a list of periods. Required roles: **USER** or **ADMIN**.
+Returns a list of periods. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 ### Territories
 ```
@@ -60,37 +59,37 @@ Returns a list of periods. Required roles: **USER** or **ADMIN**.
 ```
 GET /data/territories
 ```
-Returns a list of territories. Required roles: **USER** or **ADMIN**.
+Returns a list of territories. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Retrieve a specific territory by its code:
 ```
 GET /data/territories/:code
 ```
-Returns a territory. Required roles: **USER** or **ADMIN**.
+Returns a territory. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Retrieve all descendants of a specific territory by its code:
 ```
 GET /data/territories/:code/descendants
 ```
-Returns a list of territories. Required roles: **USER** or **ADMIN**.
+Returns a list of territories. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Add a new territory:
 ```
 POST /data/territories
 ```
-Accepts a territory, returns a territory. Required roles: **ADMIN**.
+Accepts a territory, returns a territory. Required roles: **ADMIN** or **ROOT**.
 
 #### Update an existing territory by its code:
 ```
 PUT /data/territories/:code
 ```
-Accepts a territory, returns a territory. Required roles: **ADMIN**.
+Accepts a territory, returns a territory. Required roles: **ADMIN** or **ROOT**.
 
 #### Remove an existing territory by its code:
 ```
 DELETE /data/territories/:code
 ```
-Returns nothing. Required roles: **ADMIN**.
+Returns nothing. Required roles: **ADMIN** or **ROOT**.
 
 ### Indicators
 ```
@@ -106,37 +105,37 @@ Returns nothing. Required roles: **ADMIN**.
 ```
 GET /data/indicators
 ```
-Returns a list of indicators. Required roles: **USER** or **ADMIN**.
+Returns a list of indicators. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Retrieve a specific indicator by its code:
 ```
 GET /data/indicators/:code
 ```
-Returns an indicator. Required roles: **USER** or **ADMIN**.
+Returns an indicator. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Retrieve all descendants of a specific indicator by its code:
 ```
 GET /data/indicators/:code/descendants
 ```
-Returns a list of indicators. Required roles: **USER** or **ADMIN**.
+Returns a list of indicators. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Add a new indicator:
 ```
 POST /data/indicators
 ```
-Accepts an indicator, returns an indicator. Required roles: **ADMIN**.
+Accepts an indicator, returns an indicator. Required roles: **ADMIN** or **ROOT**.
 
 #### Update an existing indicator by its code:
 ```
 PUT /data/indicators/:code
 ```
-Accepts an indicators, returns an indicators. Required roles: **ADMIN**.
+Accepts an indicators, returns an indicators. Required roles: **ADMIN** or **ROOT**.
 
 #### Remove an existing indicator by its code:
 ```
 DELETE /data/indicators/:code
 ```
-Returns nothing. Required roles: **ADMIN**.
+Returns nothing. Required roles: **ADMIN** or **ROOT**.
 
 ### Providers
 
@@ -155,37 +154,37 @@ Returns nothing. Required roles: **ADMIN**.
 ```
 GET /data/providers?[offset]&[limit]
 ```
-Returns a page of providers. Required roles: **USER** or **ADMIN**.
+Returns a page of providers. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Retrieve a specific provider by its id:
 ```
 GET /data/providers/:id
 ```
-Returns a provider. Required roles: **USER** or **ADMIN**.
+Returns a provider. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Add a new provider:
 ```
 POST /data/providers
 ```
-Accepts a provider, returns a provider. Required roles: **ADMIN**.
+Accepts a provider, returns a provider. Required roles: **ADMIN** or **ROOT**.
 
 #### Update the grants of an existing provider by its id:
 ```
 PUT /data/providers/:id/grants
 ```
-Accepts a list of grants, returns a provider. Required roles: **ADMIN**.
+Accepts a list of grants, returns a provider. Required roles: **ADMIN** or **ROOT**.
 
 #### Update the token of an existing provider by its id:
 ```
 PUT /data/providers/:id/token
 ```
-Returns a provider. Required roles: **ADMIN**.
+Returns a provider. Required roles: **ADMIN** or **ROOT**.
 
 #### Remove an existing provider:
 ```
 DELETE /data/providers/:id
 ```
-Returns nothing. Required roles: **ADMIN**.
+Returns nothing. Required roles: **ADMIN** or **ROOT**.
 
 ### Patches
 
@@ -207,27 +206,64 @@ Returns nothing. Required roles: **ADMIN**.
 ```
 GET /data/patches?[offset]&[limit]&[status]&[providerTitle]&[since]&[until]
 ```
-Returns a page of patches. Required roles: **USER** or **ADMIN**.
+Returns a page of patches. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 #### Retrieve a specific patch by its id:
 ```
 GET /data/patches/:id
 ```
-Returns a patch. Required roles: **USER** or **ADMIN**.
+Returns a patch. Required roles: **USER** or **ADMIN** or **ROOT**.
 
 ## Security Features
 
 ### Logon
-*TODO: add this section*
+
+#### Create a new security token:
+```
+POST /data/security/logon
+```
+Accepts user credentials:
+```
+{
+  "userLogin": string,
+  "userSecret": string
+}
+```
+Returns a security token. Unauthenticated requests are allowed.
 
 ### Logout
-*TODO: add this section*
+
+#### Remove an existing security token:
+```
+POST /data/security/logout
+```
+Returns nothing. Required roles: **GUEST** or **USER** or **ADMIN** or **ROOT**.
 
 ### Users
-*TODO: add this section*
+```
+{
+  "id": string,
+  "email": string,
+  "fullname": string,
+  "registeredAt": timestamp,
+  "special": boolean,
+  "guest": boolean,
+  "root": boolean,
+  "roles": string[]
+}
+```
+
+#### Retrieve a current logged-in user:
+```
+GET /data/security/users/current
+```
+Returns a user. Required roles: **GUEST** or **USER** or **ADMIN** or **ROOT**.
 
 ## Root Access
 *TODO: add this section*
 
 ## Special Notes
+* Authentication is not activated now: all data requests are allowed to be anonymous.
+* Neither GUEST nor ROOT users cannot be switched off now.
+* User management is not designed.
 * Codes of hierarchic items (like indicators or territories) can't be updated now.
