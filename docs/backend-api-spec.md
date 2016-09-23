@@ -34,7 +34,12 @@ When not containg any valid security token, requests are treated as unauthorized
 ## Business Features
 
 ### Periods
-
+```
+{
+  "code": string,
+  "title": string
+}
+```
 #### Retrieve all existing time periods:
 ```
 GET /data/periods
