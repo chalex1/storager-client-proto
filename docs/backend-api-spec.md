@@ -217,6 +217,13 @@ Returns a patch. Required roles: **USER** or **ADMIN** or **ROOT**.
 ## Security Features
 
 ### Logon
+```
+{
+  "id": string (unique, generated),
+  "createdAt": timestamp (generated),
+  "userLogin": string
+}
+```
 
 #### Create a new security token:
 ```
@@ -259,12 +266,35 @@ GET /data/security/users/current
 ```
 Returns a user. Required roles: **GUEST** or **USER** or **ADMIN** or **ROOT**.
 
+## Guest Access
+Guest access might be used to provide some very general insights of data in future.
+
 ## Root Access
-*TODO: add this section*
+Root access provides some additional functions that might be usefull at the development phase. It **must be turned off** in a production environment.
+
+#### Retrieve all existing user credentials:
+```
+GET /data/security/credentials
+```
+Returns a list of credentials. Required roles: **ROOT**.
+
+#### Retrieve all existing security tokens:
+```
+GET /data/security/tokens
+```
+Returns a list of security tokens. Required roles: **ROOT**.
+
+#### Retrieve all existing users:
+```
+GET /data/security/users
+```
+Returns a list of users. Required roles: **ROOT**.
 
 ## Special Notes
 * Authentication is not activated now: all data requests are allowed to be anonymous.
 * Neither GUEST nor ROOT users cannot be switched off now.
 * User management is not designed.
 * Codes of hierarchic items (like indicators or territories) can't be updated now.
-* Timestamps are stored and passed as numbers (UNIX-time).
+* Timestamps are stored and passed as numbers (UNIX-time) now.
+* Current user is always the ROOT now.
+* No data is available for GUEST user now.
