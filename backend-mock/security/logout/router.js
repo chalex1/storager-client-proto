@@ -18,9 +18,7 @@
       .use(imports.bodyParser.json())
 
       .post('/', function (request, response) {
-        imports.rejectUnauthorized([], request);
-        // TODO: use header instead of body
-        response.json(imports.tokenRepository.removeById(request.body.id));
+        response.json(imports.tokenRepository.removeById(imports.parseTokenId(request)));
       });
 })({
 
@@ -28,5 +26,6 @@
   express: require('express'),
 
   tokenRepository: require('../tokens/repository'),
-  rejectUnauthorized: require('../../utils/reject-unauthorized')
+  rejectUnauthorized: require('../../utils/reject-unauthorized'),
+  parseTokenId: require('../../utils/parse-token-id')
 });
