@@ -36,7 +36,7 @@ When not containg any valid security token, requests are treated as unauthorized
 ### Periods
 ```
 {
-  "code": string,
+  "code": string (unique, not null),
   "title": string
 }
 ```
@@ -44,13 +44,99 @@ When not containg any valid security token, requests are treated as unauthorized
 ```
 GET /data/periods
 ```
-Returns a list of periods. Required roles: **USER** or **ADMIN**
+Returns a list of periods. Required roles: **USER** or **ADMIN**.
 
 ### Territories
-*TODO: add this section*
+```
+{
+  "code": string (unique, not null),
+  "parentCode": string,
+  "title": string,
+  "description": string,
+  "terminal": boolean (generated)
+}
+```
+#### Retrieve all top-level territories:
+```
+GET /data/territories
+```
+Returns a list of territories. Required roles: **USER** or **ADMIN**.
+
+#### Retrieve a specific territory by its code:
+```
+GET /data/territories/:code
+```
+Returns a territory. Required roles: **USER** or **ADMIN**.
+
+#### Retrieve all descendants of a specific territory by its code:
+```
+GET /data/territories/:code/descendants
+```
+Returns a list of territories. Required roles: **USER** or **ADMIN**.
+
+#### Add a new territory:
+```
+POST /data/territories
+```
+Accepts a territory, returns a territory. Required roles: **ADMIN**.
+
+#### Updates an existing territory by its code:
+```
+PUT /data/territories/:code
+```
+Accepts a territory, returns a territory. Required roles: **ADMIN**.
+
+#### Removes an existing territory by its code:
+```
+DELETE /data/territories/:code
+```
+Returns nothing. Required roles: **ADMIN**.
 
 ### Indicators
-*TODO: add this section*
+```
+{
+  "code": string (unique, not null),
+  "parentCode": string,
+  "title": string,
+  "description": string,
+  "terminal": boolean (generated)
+}
+```
+#### Retrieve all top-level indicators:
+```
+GET /data/indicators
+```
+Returns a list of indicators. Required roles: **USER** or **ADMIN**.
+
+#### Retrieve a specific indicator by its code:
+```
+GET /data/indicators/:code
+```
+Returns an indicator. Required roles: **USER** or **ADMIN**.
+
+#### Retrieve all descendants of a specific indicator by its code:
+```
+GET /data/indicators/:code/descendants
+```
+Returns a list of indicators. Required roles: **USER** or **ADMIN**.
+
+#### Add a new indicator:
+```
+POST /data/indicators
+```
+Accepts an indicator, returns an indicator. Required roles: **ADMIN**.
+
+#### Updates an existing indicator by its code:
+```
+PUT /data/indicators/:code
+```
+Accepts an indicators, returns an indicators. Required roles: **ADMIN**.
+
+#### Removes an existing indicator by its code:
+```
+DELETE /data/indicators/:code
+```
+Returns nothing. Required roles: **ADMIN**.
 
 ### Providers
 *TODO: add this section*
@@ -71,3 +157,6 @@ Returns a list of periods. Required roles: **USER** or **ADMIN**
 
 ## Root Access
 *TODO: add this section*
+
+## Special Notes
+* Codes of hierarchic items (like indicators or territories) can't be updated now.
