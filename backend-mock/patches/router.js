@@ -18,6 +18,7 @@
       .use(imports.bodyParser.json())
 
       .get('/', function (request, response) {
+        imports.rejectUnauthorized(['USER', 'ADMIN'], request);
         const paging = {
           offset: request.query.offset || 0,
           limit: request.query.limit || 20
@@ -32,6 +33,7 @@
       })
 
       .get('/:id', function (request, response) {
+        imports.rejectUnauthorized(['USER', 'ADMIN'], request);
         response.json(imports.repository.findById(request.params.id));
       });
 })({
@@ -39,5 +41,6 @@
   bodyParser: require('body-parser'),
   express: require('express'),
 
-  repository: require('./repository')
+  repository: require('./repository'),
+  rejectUnauthorized: require('../utils/reject-unauthorized')
 });

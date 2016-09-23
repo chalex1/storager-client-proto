@@ -16,6 +16,7 @@
   router = imports.express.Router()
 
       .get('/', function (request, response) {
+        imports.rejectUnauthorized(['ROOT'], request);
         response.json(imports.repository.findAll());
       })
 
