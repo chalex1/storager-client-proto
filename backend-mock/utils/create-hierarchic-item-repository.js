@@ -61,9 +61,38 @@
     }
 
     // NOTE: updates an existing item
-    function update(code, item) {
-      //TODO: implement item update action
-      return get(code);
+    function update(code, properties) {
+      const item = get(code);
+      if (!item) {
+        throw "specified code does not exist";
+      }
+      item.title = properties.title;
+
+      var parentItem = imports.nullOrUndefined (item.parentCode) ? null : get(item.parentCode);
+      if (imports.nullOrUndefined(properties.parentCode)) {
+        if (parentItem) {
+          item.parentCode = null;
+          if (getDescendants(parentItem.code).length == 0) {
+            parentItem.terminal = true;
+          }
+        }
+      } else {
+        const newParentItem = get(properties.parentCode);
+        if (!newParentItem) {
+          throw "specified parent code does not exist";
+        }
+        if (parentItem) {
+          if (parentItem.code !== newParentItem.code) {
+            item.parentCode = newParentItem.code;
+            if (getDescendants(parentItem.code).length == 0) {
+              parentItem.terminal = true;
+            }
+          }
+        } else {
+          item.parentCode = newParentItem.code;
+        }
+      }
+      return item;
     }
 
     // NOTE: removes an existing item
