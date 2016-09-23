@@ -28,6 +28,10 @@
         if (!credential || credential.userLogin !== login || credential.userSecret !== secret) {
           throw "specified security credentials are invalid";
         }
+        const user = imports.userRepository.findByLogin(login);
+        if (!user.enabled) {
+          throw "specified security credentials are invalid";
+        }
         response.json(imports.tokenRepository.create(login));
       });
 })({
@@ -36,5 +40,6 @@
   express: require('express'),
 
   credentialRepository: require('../credentials/repository'),
-  tokenRepository: require('../tokens/repository')
+  tokenRepository: require('../tokens/repository'),
+  userRepository: require('../users/repository')
 });
