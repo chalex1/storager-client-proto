@@ -80,13 +80,13 @@ POST /data/territories
 ```
 Accepts a territory, returns a territory. Required roles: **ADMIN**.
 
-#### Updates an existing territory by its code:
+#### Update an existing territory by its code:
 ```
 PUT /data/territories/:code
 ```
 Accepts a territory, returns a territory. Required roles: **ADMIN**.
 
-#### Removes an existing territory by its code:
+#### Remove an existing territory by its code:
 ```
 DELETE /data/territories/:code
 ```
@@ -126,13 +126,13 @@ POST /data/indicators
 ```
 Accepts an indicator, returns an indicator. Required roles: **ADMIN**.
 
-#### Updates an existing indicator by its code:
+#### Update an existing indicator by its code:
 ```
 PUT /data/indicators/:code
 ```
 Accepts an indicators, returns an indicators. Required roles: **ADMIN**.
 
-#### Removes an existing indicator by its code:
+#### Remove an existing indicator by its code:
 ```
 DELETE /data/indicators/:code
 ```
@@ -169,26 +169,51 @@ POST /data/providers
 ```
 Accepts a provider, returns a provider. Required roles: **ADMIN**.
 
-#### Updates the grants of an existing provider by its id:
+#### Update the grants of an existing provider by its id:
 ```
 PUT /data/providers/:id/grants
 ```
 Accepts a list of grants, returns a provider. Required roles: **ADMIN**.
 
-#### Updates the token of an existing provider by its id:
+#### Update the token of an existing provider by its id:
 ```
 PUT /data/providers/:id/token
 ```
 Returns a provider. Required roles: **ADMIN**.
 
-#### Removes an existing provider:
+#### Remove an existing provider:
 ```
 DELETE /data/providers/:id
 ```
 Returns nothing. Required roles: **ADMIN**.
 
 ### Patches
-*TODO: add this section*
+
+```
+{
+  "id": string (unique, generated),
+  "comment": string,
+  "createdAt": number (generated),
+  "providerId": string,
+  "status": string,
+  "indicatorInfos": {
+    indicatorId: string,
+    totalPoints: number
+  }[]
+}
+```
+
+#### Retrieve all existing patches (paginated & filtered):
+```
+GET /data/patches?[offset]&[limit]&[status]&[providerTitle]&[since]&[until]
+```
+Returns a page of patches. Required roles: **USER** or **ADMIN**.
+
+#### Retrieve a specific patch by its id:
+```
+GET /data/patches/:id
+```
+Returns a patch. Required roles: **USER** or **ADMIN**.
 
 ## Security Features
 
