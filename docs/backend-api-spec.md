@@ -145,7 +145,7 @@ Returns nothing. Required roles: **ADMIN** or **ROOT**.
   "title": string,
   "description": string,
   "token": string (generated),
-  "registeredAt": number (generated),
+  "registeredAt": timestamp (generated),
   "grants": string[]
 }
 ```
@@ -192,7 +192,7 @@ Returns nothing. Required roles: **ADMIN** or **ROOT**.
 {
   "id": string (unique, generated),
   "comment": string,
-  "createdAt": number (generated),
+  "createdAt": timestamp (generated),
   "providerId": string,
   "status": string,
   "indicatorInfos": {
@@ -267,3 +267,4 @@ Returns a user. Required roles: **GUEST** or **USER** or **ADMIN** or **ROOT**.
 * Neither GUEST nor ROOT users cannot be switched off now.
 * User management is not designed.
 * Codes of hierarchic items (like indicators or territories) can't be updated now.
+* Timestamps are stored and passed as numbers (UNIX-time).
