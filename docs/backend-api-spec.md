@@ -294,3 +294,4 @@ Returns a list of users.
 ## Special Notes
 * User management is not designed (and is not planned).
 * Codes of hierarchic items (like indicators or territories) can't be updated now.
+* Guest user has the root access now (for easier feature testing).
