@@ -23,6 +23,7 @@
     const server = imports.express();
 
     imports.indicatorRouter.apply(server, defaults.routes.data);
+    imports.patchRouter.apply(server, defaults.routes.data);
     imports.periodRouter.apply(server, defaults.routes.data);
     imports.providerRouter.apply(server, defaults.routes.data);
     imports.territoryRouter.apply(server, defaults.routes.data);
@@ -42,6 +43,7 @@
   express: require('express'),
 
   indicatorRouter: require ('./indicators/router'),
+  patchRouter: require('./patches/router'),
   periodRouter: require('./periods/router'),
   providerRouter: require('./providers/router'),
   territoryRouter: require('./territories/router'),
