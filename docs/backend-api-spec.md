@@ -139,7 +139,53 @@ DELETE /data/indicators/:code
 Returns nothing. Required roles: **ADMIN**.
 
 ### Providers
-*TODO: add this section*
+
+```
+{
+  "id": string (unique, generated),
+  "title": string,
+  "description": string,
+  "token": string (generated),
+  "registeredAt": number (generated),
+  "grants": string[]
+}
+```
+
+#### Retrieve all existing providers (paginated):
+```
+GET /data/providers?[offset]&[limit]
+```
+Returns a page of providers. Required roles: **USER** or **ADMIN**.
+
+#### Retrieve a specific provider by its id:
+```
+GET /data/providers/:id
+```
+Returns a provider. Required roles: **USER** or **ADMIN**.
+
+#### Add a new provider:
+```
+POST /data/providers
+```
+Accepts a provider, returns a provider. Required roles: **ADMIN**.
+
+#### Updates the grants of an existing provider by its id:
+```
+PUT /data/providers/:id/grants
+```
+Accepts a list of grants, returns a provider. Required roles: **ADMIN**.
+
+#### Updates the token of an existing provider by its id:
+```
+PUT /data/providers/:id/token
+```
+Returns a provider. Required roles: **ADMIN**.
+
+#### Removes an existing provider:
+```
+DELETE /data/providers/:id
+```
+Returns nothing. Required roles: **ADMIN**.
 
 ### Patches
 *TODO: add this section*
