@@ -31,6 +31,7 @@
       enabled: true,
       special: true,
       guest: true,
+      root: true,
       roles: ["GUEST"]
     },
     {
