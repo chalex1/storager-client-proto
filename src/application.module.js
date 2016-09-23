@@ -1,4 +1,4 @@
 (function () {
 
-	var app = angular.module('app', ['app.periodList']);
+  var app = angular.module('app', ['app.periodList']);
 }) ();
