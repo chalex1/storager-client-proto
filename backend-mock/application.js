@@ -13,6 +13,8 @@
 
     routes: {
 
+      assets: '/static',
+
       data: '/data'
     }
   };
@@ -35,12 +37,16 @@
     imports.userRouter.apply(server, defaults.routes.data);
 
     server
-        .use(imports.express.static(config.paths.assets))
+        .use(defaults.routes.assets, imports.express.static(config.paths.assets))
+        .get('/*', function (request, response) {
+          response.sendFile(imports.path.resolve(config.paths.assets + 'index.html'));
+        })
         .listen (config.port);
   }
 })({
 
   express: require('express'),
+  path: require('path'),
 
   indicatorRouter: require ('./indicators/router'),
   patchRouter: require('./patches/router'),
