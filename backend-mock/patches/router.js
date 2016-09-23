@@ -19,8 +19,8 @@
 
       .get('/', function (request, response) {
         const paging = {
-          offset: request.query.offset,
-          limit: request.query.limit
+          offset: request.query.offset || 0,
+          limit: request.query.limit || 20
         };
         const filtering = {
           providerTitle: request.query.providerTitle,

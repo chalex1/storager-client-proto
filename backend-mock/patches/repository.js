@@ -25,7 +25,7 @@
                             );
                           });
     return {
-      items: filtered,
+      items: filtered.slice(paging.offset, paging.limit),
       total: filtered.length
     };
   }

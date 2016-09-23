@@ -31,8 +31,11 @@
     return provider;
   }
 
-  function findAll() {
-    return providers;
+  function findAll(paging) {
+    return {
+      items: providers.slice(paging.offset, paging.limit),
+      total: providers.length
+    };
   }
 
   function findById(id) {

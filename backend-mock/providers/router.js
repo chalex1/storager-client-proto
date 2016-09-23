@@ -22,7 +22,11 @@
       })
 
       .get('/', function (request, response) {
-        response.json(imports.repository.findAll());
+        const paging = {
+          offset: request.query.offset || 0,
+          limit: request.query.limit || 20
+        };
+        response.json(imports.repository.findAll(paging));
       })
 
       .get('/:id', function (request, response) {
