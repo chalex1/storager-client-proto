@@ -14,6 +14,23 @@ Requests starting with `/static/` are designed to return static assets, f.e:
 * HTML templates
 * CSS resources
 
+## Authentication & Authorization
+**Current status:** authentication and authorization are not applied at the moment.
+
+Before being performed, client requests are validated against existing roles to have sufficient authorization.
+
+There are 2 normal roles:
+* USER (authorized to access application in read-only mode)
+* ADMIN (authorized to add/update/remove data related to providers, indicators and territories)
+
+There are also 2 special roles:
+* GUEST (non-authenticated clients, might be switched off)
+* ROOT (root-access client, might be switched off)
+
+Client requests need a special header `X-Auth-Token` to be set and contain a valid security token. Tokens for the normal roles can be obtained through the standard logon feature. Tokens for the special roles are hard-defined and equal to the name of a respective role written in a lower case ('*guest*' for GUEST, '*root*' for ROOT).
+
+When not containg any valid security token, requests are treated as unauthorized by default.
+
 ## Business Features
 
 #### Periods
