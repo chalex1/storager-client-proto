@@ -20,12 +20,13 @@
       })
 
       .get('/current', function (request, response) {
-        var login = "root"; // TODO: 
-        response.json(imports.repository.findByLogin(login));
+        const user = imports.rejectUnauthorized([], request);
+        response.json(imports.repository.findByLogin(user.login));
       });
 })({
 
   express: require('express'),
 
-  repository: require('./repository')
+  repository: require('./repository'),
+  rejectUnauthorized: require('../../utils/reject-unauthorized')
 });

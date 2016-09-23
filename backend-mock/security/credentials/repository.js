@@ -30,6 +30,10 @@
     {
       userLogin: "admin",
       userSecret: "admin123"
+    },
+    {
+      userLogin: "root",
+      userSecret: "root"
     }
   ];
 })({});

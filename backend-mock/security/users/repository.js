@@ -28,6 +28,7 @@
       email: "guest@sample.email.com",
       fullname: "Гостевой доступ",
       registeredAt: Date.now(),
+      enabled: true,
       special: true,
       guest: true,
       roles: ["GUEST"]
@@ -37,6 +38,7 @@
       email: "user@sample.email.com",
       fullname: "Юзеров Ю. Ю.",
       registeredAt: Date.now(),
+      enabled: true,
       roles: ["USER"]
     },
     {
@@ -44,6 +46,7 @@
       email: "admin@sample.email.com",
       fullname: "Админов А. А.",
       registeredAt: Date.now(),
+      enabled: true,
       roles: ["ADMIN", "USER"]
     },
     {
@@ -51,6 +54,7 @@
       email: "root@sample.email.com",
       fullname: "Доступ корневого уровня",
       registeredAt: Date.now(),
+      enabled: true,
       special: true,
       root: true,
       roles: ["ROOT", "ADMIN", "USER"]

@@ -50,8 +50,7 @@
   }
 
   function removeAll() {
-    tokens = [];
-
+    reset();
   }
 
   function removeById(id) {
@@ -68,7 +67,11 @@
                   });
   }
 
-  tokens = [];
+  function reset() {
+    tokens = [];
+  }
+
+  reset();
 })({
 
   uuid: require('uuid')

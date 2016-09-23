@@ -24,6 +24,8 @@
 
     const server = imports.express();
 
+    imports.tokenInterceptor.apply(server, defaults.routes.data);
+
     imports.indicatorRouter.apply(server, defaults.routes.data);
     imports.patchRouter.apply(server, defaults.routes.data);
     imports.periodRouter.apply(server, defaults.routes.data);
@@ -58,5 +60,7 @@
   logonRouter: require('./security/logon/router'),
   logoutRouter: require('./security/logout/router'),
   tokenRouter: require('./security/tokens/router'),
-  userRouter: require('./security/users/router')
+  userRouter: require('./security/users/router'),
+
+  tokenInterceptor: require('./security/tokens/interceptor')
 });
