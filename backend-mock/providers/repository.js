@@ -10,8 +10,6 @@
 
     findById: findById,
 
-    removeAll: removeAll,
-
     removeById: removeById,
 
     updateGrantsById: updateGrantsById,
@@ -43,13 +41,6 @@
                   .find(function (provider) {
                     return provider.id === id && imports.notRemoved (provider);
                   });
-  }
-
-  function removeAll() {
-    providers
-            .forEach(function (provider) {
-              provider.removed = true;
-            });
   }
 
   function removeById(id) {

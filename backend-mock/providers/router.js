@@ -33,10 +33,6 @@
         response.json(imports.repository.findById(request.params.id));
       })
 
-      .delete('/', function (request, response) {
-        response.json(imports.repository.removeAll());
-      })
-
       .delete('/:id', function (request, response) {
         response.json(imports.repository.removeById(request.params.id));
       })
