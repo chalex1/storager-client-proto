@@ -1,0 +1,4 @@
+$(function () {
+
+	$(".dropdown-button").dropdown();
+});
