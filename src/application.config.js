@@ -4,15 +4,35 @@
 
   angular
         .module('application')
-        .config(function($locationProvider) {
-          $locationProvider.html5Mode(true);
-        })
-        .config(function($stateProvider) {
-          var periodListState = {
-            name: 'pariods',
-            url: '/periods',
-            component: 'periodList'
-          };
-          $stateProvider.state(periodListState);
-        });
+        .config([
+          '$locationProvider',
+          configureLocationProvider
+        ])
+        .config([
+          '$stateProvider',
+          configureStateProvider
+        ]);
+
+  var states = [
+
+    {
+      name: 'periods',
+      url: '/periods',
+      views: {
+        'periodList': {
+          component: 'periodList'
+        }
+      }
+    }
+  ];
+
+  function configureLocationProvider($locationProvider) {
+    $locationProvider.html5Mode(true);
+  }
+
+  function configureStateProvider($stateProvider) {
+    states.forEach(function (state) {
+      $stateProvider.state(state);
+    });
+  }
 })();
