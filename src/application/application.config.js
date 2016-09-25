@@ -37,7 +37,7 @@
 
                   .state('application', {
                     abstract: true,
-                    url: '/',
+                    url: '',
                     views: {
                       '': {
                         component: 'application'
@@ -46,7 +46,7 @@
                   })
 
                   .state('application.logon', {
-                    url: 'logon',
+                    url: '/logon',
                     views: {
                       '@application': {
                         component: 'logon'
@@ -55,10 +55,46 @@
                   })
 
                   .state('application.authorized', {
-                    url: 'authorized',
+                    abstract: true,
                     views: {
                       '@application': {
                         component: 'authorized'
+                      }
+                    }
+                  })
+
+                  .state('application.authorized.axes', {
+                    url: '/axes',
+                    views: {
+                      '@application.authorized': {
+                        component: 'axisWorkspace'
+                      }
+                    }
+                  })
+
+                  .state('application.authorized.indicators', {
+                    url: '/indicators',
+                    views: {
+                      '@application.authorized': {
+                        component: 'indicatorWorkspace'
+                      }
+                    }
+                  })
+
+                  .state('application.authorized.patches', {
+                    url: '/patches',
+                    views: {
+                      '@application.authorized': {
+                        component: 'patchWorkspace'
+                      }
+                    }
+                  })
+
+                  .state('application.authorized.providers', {
+                    url: '/providers',
+                    views: {
+                      '@application.authorized': {
+                        component: 'providerWorkspace'
                       }
                     }
                   })
@@ -74,7 +110,7 @@
   }
 
   function configureUrlRouterProvider($urlRouterProvider) {
-    $urlRouterProvider.when('/', '/authorized');
+    $urlRouterProvider.when('/', '/authorized/patches');
   }
 
   function configureLocationProvider($locationProvider) {

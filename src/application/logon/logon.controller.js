@@ -21,7 +21,7 @@
       logonService
               .logon(self.login, self.secret)
               .success(function () {
-                $state.go('application.authorized');
+                $state.go('application.authorized.patches');
               })
               .error(function () {
                 alert("Авторизация не выполнена, повторите попытку");
