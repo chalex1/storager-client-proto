@@ -43,6 +43,17 @@
         .get('/*', function (request, response) {
           response.sendFile(imports.path.resolve(config.paths.assets + 'index.html'));
         })
+        .use(function (error, request, response, next) {
+          if (error === 'NOT_AUTHORIZED') {
+            response
+                  .status(401)
+                  .json({
+                    message: "NOT_AUTHORIZED"
+                  });
+          } else {
+            next(error);
+          }
+        })
         .listen (config.port);
   }
 })({

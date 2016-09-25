@@ -31,19 +31,6 @@
           configureStateProvider
         ]);
 
-  function configureHttpProvider($httpProvider) {
-    $httpProvider.interceptors.push('httpRequestInterceptor');
-  }
-
-  function httpRequestInterceptor($localStorage) {
-    return {
-      request: function (config) {
-        config.headers['X-Auth-Token'] = $localStorage.authTokenId;
-        return config;
-      }
-    };
-  }
-
   function configureStateProvider($stateProvider) {
 
     $stateProvider
@@ -94,6 +81,19 @@
     $locationProvider.html5Mode(true);
   }
 
+  function configureHttpProvider($httpProvider) {
+    $httpProvider.interceptors.push('httpRequestInterceptor');
+  }
+
+  function httpRequestInterceptor($localStorage) {
+    return {
+      request: function (config) {
+        config.headers['X-Auth-Token'] = $localStorage.authTokenId;
+        return config;
+      }
+    };
+  }
+
   function configureHttp($provide, $state) {
 
     $provide.decorator('$http', function($delegate, $injector) {
@@ -102,7 +102,7 @@
       var $state = $injector.get('$state');
 
       function handleUnauthorizedError(error) {
-        if (error && error.indexOf('NOT_AUTHENTICATED') > -1) {
+        if (error.message && error.message === 'NOT_AUTHORIZED') {
           $state.go('application.logon');
         }
       }

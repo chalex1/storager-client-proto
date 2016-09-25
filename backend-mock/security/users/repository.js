@@ -29,9 +29,7 @@
       fullname: "Гостевой доступ",
       registeredAt: imports.timestamp(),
       enabled: true,
-      special: true,
-      guest: true,
-      root: true,
+      root: false,
       roles: ["GUEST"]
     },
     {
@@ -48,7 +46,7 @@
       fullname: "Админов А. А.",
       registeredAt: imports.timestamp(),
       enabled: true,
-      roles: ["ADMIN", "USER"]
+      roles: ["ADMIN"]
     },
     {
       login: "root",
@@ -56,9 +54,8 @@
       fullname: "Доступ корневого уровня",
       registeredAt: imports.timestamp(),
       enabled: true,
-      special: true,
       root: true,
-      roles: ["ROOT", "ADMIN", "USER"]
+      roles: ["ROOT"]
     }
   ];
 })({

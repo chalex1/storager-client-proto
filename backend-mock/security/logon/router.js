@@ -20,17 +20,17 @@
       .post('/', function (request, response) {
         const clientCredential = request.body;
         if (!clientCredential || !clientCredential.userLogin || !clientCredential.userSecret) {
-          throw "security credentials are missing";
+          throw "NOT_AUTHORIZED";
         }
         const login = clientCredential.userLogin;
         const secret = clientCredential.userSecret;
         const credential = imports.credentialRepository.findByUserLogin(login);
         if (!credential || credential.userLogin !== login || credential.userSecret !== secret) {
-          throw "specified security credentials are invalid";
+          throw "NOT_AUTHORIZED";
         }
         const user = imports.userRepository.findByLogin(login);
         if (!user.enabled) {
-          throw "specified security credentials are invalid";
+          throw "NOT_AUTHORIZED";
         }
         response.json(imports.tokenRepository.create(login));
       });

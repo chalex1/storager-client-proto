@@ -17,6 +17,6 @@
         }
       }
     }
-    throw 'NOT_AUTHENTICATED';
+    throw 'NOT_AUTHORIZED';
   };
 })({});
