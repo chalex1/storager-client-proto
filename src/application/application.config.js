@@ -33,7 +33,7 @@
                     abstract: true,
                     url: '/',
                     views: {
-                      'applicationContainer': {
+                      '': {
                         component: 'application'
                       }
                     }
@@ -42,7 +42,7 @@
                   .state('application.periods', {
                     url: 'periods',
                     views: {
-                      'application@application': {
+                      '@application': {
                         component: 'periodList'
                       }
                     }
@@ -51,7 +51,7 @@
                   .state('application.lost', {
                     url: '*path',
                     views: {
-                      'application@application': {
+                      '@application': {
                         component: 'lost'
                       }
                     }
