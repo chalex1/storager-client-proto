@@ -110,7 +110,7 @@
   }
 
   function configureUrlRouterProvider($urlRouterProvider) {
-    $urlRouterProvider.when('/', '/authorized/patches');
+    $urlRouterProvider.when('/', '/patches');
   }
 
   function configureLocationProvider($locationProvider) {
