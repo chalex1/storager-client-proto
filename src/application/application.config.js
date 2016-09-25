@@ -54,11 +54,11 @@
                     }
                   })
 
-                  .state('application.periods', {
-                    url: 'periods',
+                  .state('application.authorized', {
+                    url: 'authorized',
                     views: {
                       '@application': {
-                        component: 'periodList'
+                        component: 'authorized'
                       }
                     }
                   })
@@ -74,7 +74,7 @@
   }
 
   function configureUrlRouterProvider($urlRouterProvider) {
-    $urlRouterProvider.when('/', '/periods');
+    $urlRouterProvider.when('/', '/authorized');
   }
 
   function configureLocationProvider($locationProvider) {

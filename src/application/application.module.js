@@ -8,6 +8,6 @@
           'ui.router',
           'application.logon',
           'application.lost',
-          'application.periodList'
+          'application.authorized'
         ]);
 }) ();
