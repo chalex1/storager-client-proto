@@ -2,8 +2,22 @@
 
   'use strict';
 
+  // TODO: decrease complexity of this configuration
+
   angular
         .module('application')
+        .factory('httpRequestInterceptor', [
+          '$localStorage',
+          httpRequestInterceptor
+        ])
+        .config([
+          '$httpProvider',
+          configureHttpProvider
+        ])
+        .config([
+          '$provide',
+          configureHttp
+        ])
         .config([
           '$locationProvider',
           configureLocationProvider
@@ -17,12 +31,17 @@
           configureStateProvider
         ]);
 
-  function configureLocationProvider($locationProvider) {
-    $locationProvider.html5Mode(true);
+  function configureHttpProvider($httpProvider) {
+    $httpProvider.interceptors.push('httpRequestInterceptor');
   }
 
-  function configureUrlRouterProvider($urlRouterProvider) {
-    $urlRouterProvider.when('/', '/periods');
+  function httpRequestInterceptor($localStorage) {
+    return {
+      request: function (config) {
+        config.headers['X-Auth-Token'] = $localStorage.authTokenId;
+        return config;
+      }
+    };
   }
 
   function configureStateProvider($stateProvider) {
@@ -65,5 +84,62 @@
                       }
                     }
                   });
+  }
+
+  function configureUrlRouterProvider($urlRouterProvider) {
+    $urlRouterProvider.when('/', '/periods');
+  }
+
+  function configureLocationProvider($locationProvider) {
+    $locationProvider.html5Mode(true);
+  }
+
+  function configureHttp($provide, $state) {
+
+    $provide.decorator('$http', function($delegate, $injector) {
+
+      var $localStorage = $injector.get('$localStorage');
+      var $state = $injector.get('$state');
+
+      function handleUnauthorizedError(error) {
+        if (error && error.indexOf('NOT_AUTHENTICATED') > -1) {
+          $state.go('application.logon');
+        }
+      }
+
+      var originalDelete = $delegate.delete;
+
+      $delegate.delete = function () {
+        return originalDelete
+                        .apply($delegate, arguments)
+                        .error(handleUnauthorizedError);
+      };
+
+      var originalGet = $delegate.get;
+
+      $delegate.get = function () {
+        return originalGet
+                        .apply($delegate, arguments)
+                        .error(handleUnauthorizedError);
+      };
+
+      var originalPost = $delegate.post;
+
+      $delegate.post = function () {
+        return originalPost
+                        .apply($delegate, arguments)
+                        .error(handleUnauthorizedError);
+      };
+
+      var originalPut = $delegate.put;
+
+      $delegate.put = function () {
+        return originalPut
+                        .apply($delegate, arguments)
+                        .error(handleUnauthorizedError);
+      };
+
+      return $delegate;
+    });
   }
 })();

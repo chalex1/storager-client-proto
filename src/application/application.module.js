@@ -4,6 +4,7 @@
 
   angular
         .module('application', [
+          'ngStorage',
           'ui.router',
           'application.logon',
           'application.lost',
