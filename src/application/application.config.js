@@ -39,6 +39,15 @@
                     }
                   })
 
+                  .state('application.logon', {
+                    url: 'logon',
+                    views: {
+                      '@application': {
+                        component: 'logon'
+                      }
+                    }
+                  })
+
                   .state('application.periods', {
                     url: 'periods',
                     views: {
