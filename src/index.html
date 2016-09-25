@@ -10,14 +10,19 @@
         <link rel="stylesheet" href="/static/main.css"/>
 
         <link rel="stylesheet" href="/static/application/application.component.css"/>
+        <link rel="stylesheet" href="/static/application/lost/lost.component.css"/>
         <link rel="stylesheet" href="/static/application/period-list/period-list.component.css"/>
     </head>
 
     <body>
-        <div ui-view="application"></div>
+        <div ui-view="applicationContainer"></div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.0-beta.3/angular-ui-router.min.js"></script>
+
+        <script src="/static/application/lost/lost.module.js"></script>
+        <script src="/static/application/lost/lost.component.js"></script>
+        <script src="/static/application/lost/lost.controller.js"></script>
 
         <script src="/static/application/period-list/period-list.module.js"></script>
         <script src="/static/application/period-list/period-list.component.js"></script>
