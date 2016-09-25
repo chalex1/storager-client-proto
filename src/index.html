@@ -3,21 +3,25 @@
 <html>
 
     <head>
-        <link href="/static/main.css" rel="stylesheet"/>
-        <link href="/static/period-list/period-list.component.css" rel="stylesheet"/>
+        <base href="/"/>
+        <meta charset="utf-8">
+        <title>Storager Client Prototype</title>
+
+        <link rel="stylesheet" href="/static/main.css"/>
+        <link rel="stylesheet" href="/static/period-list/period-list.component.css"/>
     </head>
 
-    <body ng-app="app">
-
-        <h1>Index Page</h1>
-
-        <period-list></period-list>
+    <body>
+        <ui-view></ui-view>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.0-beta.3/angular-ui-router.min.js"></script>
 
         <script src="/static/period-list/period-list.module.js"></script>
         <script src="/static/period-list/period-list.component.js"></script>
         <script src="/static/period-list/period-list.controller.js"></script>
         <script src="/static/application.module.js"></script>
+        <script src="/static/application.config.js"></script>
+        <script src="/static/main.js"></script>
     </body>
 </html>

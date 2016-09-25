@@ -1,4 +1,10 @@
 (function () {
 
-  var app = angular.module('app', ['app.periodList']);
+  'use strict';
+
+  angular
+        .module('application', [
+          'ui.router',
+          'application.periodList'
+        ]);
 }) ();

@@ -1,24 +1,26 @@
 (function () {
 
-  var periodList = angular.module('app.periodList');
+  'use strict';
 
-  periodList.controller ('periodListController', [
-    '$http',
-    PeriodListController
-  ]);
+  angular
+        .module('application.periodList')
+        .controller('periodListController', [
+          '$http',
+          PeriodListController
+        ]);
 
-  function PeriodListController ($http) {
-    
+  function PeriodListController($http) {
+
     var self = this;
-    
+
     this.periods;
 
     this.updatePeriods = updatePeriods;
 
-    function updatePeriods () {
+    function updatePeriods() {
       $http
-        .get ('/data/periods')
-        .then (function (result) {
+        .get('/data/periods')
+        .then(function (result) {
           self.periods = result.data;
         });
     }

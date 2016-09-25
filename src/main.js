@@ -3,5 +3,5 @@
   'use strict';
 
   angular
-        .module('application.periodList', []);
+        .bootstrap(document, ['application']);
 }) ();
