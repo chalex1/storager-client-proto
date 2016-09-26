@@ -15,5 +15,5 @@ $ npm start
 ```
 You can also specify a custom port, for example:
 ```
-$ npm start --port=5000
+$ npm start -- --port=5000
 ```
