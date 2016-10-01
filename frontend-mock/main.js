@@ -1,7 +1,7 @@
 $(function () {
-
-	$(".dropdown-button").dropdown({	
-		belowOrigin: true // Displays dropdown below the button
+	$('.dropdown-button').dropdown({
+		belowOrigin: false, // Displays dropdown below the button
+		constrain_width: false
 	});
 	$('select').material_select();
 	$('.datepicker').pickadate({

@@ -12,3 +12,14 @@ footer.page-footer.custom {
 
 	padding-top: 0px;
 }
+
+.col.tree{
+
+    background-color: #ef9a9a;
+margin-bottom: 7px;
+padding: 2px;
+	
+}
+.col.tree.leaf{
+	background-color: #ffebee;
+}
