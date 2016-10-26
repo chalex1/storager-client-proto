@@ -12,6 +12,9 @@ $(function () {
 		accordion: true
 	});
 	$('.modal-trigger').leanModal();
+	
+	if($('.modal-trigger').length)
+	$('.modal-trigger').openModal();// and open them all
   
     $('input.autocomplete').autocomplete({
     data: {
