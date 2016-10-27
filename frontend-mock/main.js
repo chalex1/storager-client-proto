@@ -11,17 +11,20 @@ $(function () {
 	$('.collapsible').collapsible({
 		accordion: true
 	});
-	$('.modal-trigger').leanModal();
-	
-	if($('.modal-trigger').length)
-	$('.modal-trigger').openModal();// and open them all
-  
-    $('input.autocomplete').autocomplete({
-    data: {
-		  "СПб ГУП СПб ИАЦ": null,
-		  "Какая-то другая организация": null,
-		  "Организация 1": null,
-		  "Организация 27": null
+	// $('.modal-trigger').leanModal();
+
+	if ($('#provider1').length > 0)
+		$('#provider1').openModal();// and open them all
+
+	if ($('#patch1').length > 0)
+		$('#patch1').openModal();// and open them all
+
+	$('input.autocomplete').autocomplete({
+		data: {
+			"СПб ГУП СПб ИАЦ": null,
+			"Какая-то другая организация": null,
+			"Организация 1": null,
+			"Организация 27": null
 		}
 	});
 });
