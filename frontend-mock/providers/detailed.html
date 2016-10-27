@@ -4,41 +4,41 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
 
 	<title>Providers</title>
 
-		<link href="../main.css" rel="stylesheet"/>
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.css" rel="stylesheet"/>
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
-		<script type="text/javascript" src="../main.js"></script>
+	<link href="../main.css" rel="stylesheet" />
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.css" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
+	<script type="text/javascript" src="../main.js"></script>
 </head>
 
 <body class="storager">
-		<ul id="dropdown1" class="dropdown-content">
-			<li><a href="../login.html">Выход</a></li>
-		</ul>
-		<ul id="dropdownAxis" class="dropdown-content">
-			<li><a href="../axes/territory.html">Территории</a></li>
-			<li><a href="../axes/period.html">Периоды</a></li>
-		</ul>
-		<nav>
-			<div class="nav-wrapper">
-				<a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Сервис Интеграции</a>
-				<ul  class="right hide-on-med-and-down" style="padding-left:30px">
-					<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Имя пользователя<i class="material-icons right">arrow_drop_down</i></a></li>
-				</ul>
-				<ul class="right hide-on-med-and-down">
-					<li><a href="../patches/list.html">Загрузки</a></li>
-					<li class="active"><a href="../providers/list.html">Организации</a></li>
-					<li><a href="../indicators/tree.html">Показатели</a></li>
-					<li><a class="dropdown-button" href="#!"  data-activates="dropdownAxis">Оси&nbsp;&nbsp; <i class="material-icons right">arrow_drop_down</i></a></li>
-				</ul>
-			</div>
-		</nav>
+	<ul id="dropdown1" class="dropdown-content">
+		<li><a href="../login.html">Выход</a></li>
+	</ul>
+	<ul id="dropdownAxis" class="dropdown-content">
+		<li><a href="../axes/territory.html">Территории</a></li>
+		<li><a href="../axes/period.html">Периоды</a></li>
+	</ul>
+	<nav>
+		<div class="nav-wrapper">
+			<a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Сервис Интеграции</a>
+			<ul class="right hide-on-med-and-down" style="padding-left:30px">
+				<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Имя пользователя<i class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="../patches/list.html">Загрузки</a></li>
+				<li class="active"><a href="../providers/list.html">Организации</a></li>
+				<li><a href="../indicators/tree.html">Показатели</a></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownAxis">Оси&nbsp;&nbsp; <i class="material-icons right">arrow_drop_down</i></a></li>
+			</ul>
+		</div>
+	</nav>
 
 	<main>
 		<div class="container">
@@ -147,42 +147,44 @@
 			<h4>Редактирование организации</h4>
 			<br>
 			<br>
-			<form>
-				<div class="input-field">
-					<i class="material-icons prefix">account_circle</i>
-					<input id="organization_name_id" type="text" class="validate">
-					<label for="organization_name_id">Название организации</label>
-				</div>
-				<div class="input-field">
-					<i class="material-icons prefix">description</i>
-					<input id="organization_description_id" type="text" class="validate">
-					<label for="organization_description_id">Описание организации</label>
-				</div>
-				<p>
-					<input type="checkbox" id="ind5" />
-					<label for="ind5">Показатель 5</label>
-				</p>
-				<p>
-					<input type="checkbox" id="ind1" />
-					<label for="ind1">Показатель 1</label>
-				</p>
-				<p>
-					<input type="checkbox" id="ind7" />
-					<label for="ind7">Показатель 7</label>
-				</p>
-				<p>
-					<input type="checkbox" id="ind15" />
-					<label for="ind15">Показатель 15</label>
-				</p>
-				<p>
-					<input type="checkbox" id="ind11" />
-					<label for="ind11">Показатель 11</label>
-				</p>
-				<p>
-					<input type="checkbox" id="ind17" />
-					<label for="ind17">Показатель 17</label>
-				</p>
-			</form>
+			<div class="row">
+				<form class="col s12">
+					<div class="input-field">
+						<i class="material-icons prefix">account_circle</i>
+						<input id="organization_name_id" type="text" class="validate">
+						<label for="organization_name_id">Название организации</label>
+					</div>
+					<div class="input-field">
+						<i class="material-icons prefix">description</i>
+						<input id="organization_description_id" type="text" class="validate">
+						<label for="organization_description_id">Описание организации</label>
+					</div>
+					<p>
+						<input type="checkbox" id="ind5" />
+						<label for="ind5">Показатель 5</label>
+					</p>
+					<p>
+						<input type="checkbox" id="ind1" />
+						<label for="ind1">Показатель 1</label>
+					</p>
+					<p>
+						<input type="checkbox" id="ind7" />
+						<label for="ind7">Показатель 7</label>
+					</p>
+					<p>
+						<input type="checkbox" id="ind15" />
+						<label for="ind15">Показатель 15</label>
+					</p>
+					<p>
+						<input type="checkbox" id="ind11" />
+						<label for="ind11">Показатель 11</label>
+					</p>
+					<p>
+						<input type="checkbox" id="ind17" />
+						<label for="ind17">Показатель 17</label>
+					</p>
+				</form>
+			</div>
 		</div>
 		<div class="modal-footer">
 			<a href="list.html" class="modal-action modal-close waves-effect waves-light  btn-flat ">Отмена</a>
