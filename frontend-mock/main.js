@@ -1,7 +1,7 @@
 $(function () {
 	$('.dropdown-button').dropdown({
-		belowOrigin: false, // Displays dropdown below the button
-		constrain_width: false
+		belowOrigin: true, // Displays dropdown below the button
+		constrain_width: true
 	});
 	$('select').material_select();
 	$('.datepicker').pickadate({
@@ -11,13 +11,13 @@ $(function () {
 	$('.collapsible').collapsible({
 		accordion: true
 	});
-	// $('.modal-trigger').leanModal();
+	 $('.modal').modal();
 
 	if ($('#provider1').length > 0)
-		$('#provider1').openModal();// and open them all
+		$('#provider1').modal('open');// and open them all
 
 	if ($('#patch1').length > 0)
-		$('#patch1').openModal();// and open them all
+		$('#patch1').modal('open');// and open them all
 
 	$('input.autocomplete').autocomplete({
 		data: {
